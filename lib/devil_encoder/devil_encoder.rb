@@ -22,6 +22,7 @@ require "devil"
 require "tempfile"
 
 require "imageruby/decoder"
+require "imageruby-bmp"
 
 module ImageRuby
   class DevilDecoder < ImageRuby::Decoder
@@ -43,7 +44,13 @@ module ImageRuby
         img.save(path2)
       end
 
-      image_class.from_file(path2)
+      encoded_bmp = nil
+
+      File.open(path2, "rb") do |file|
+        encoded_bmp = file.read
+      end
+
+      ImageRuby::BmpDecoder.new.decode(encoded_bmp, image_class)
     end
   end
 end

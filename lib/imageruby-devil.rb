@@ -20,3 +20,5 @@ along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 =end
 require "rubygems"
 require "devil_encoder/devil_encoder"
+require "imageruby-devil/devil_mixin"
+

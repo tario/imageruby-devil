@@ -1,0 +1,20 @@
+= ImageRuby-Devil - Bridge between ImageRuby and Devil image library
+
+Implements a set of features for ImageRuby using Devil image library:
+
+* New format encoders and decoders
+* New operations: blur, mirror, etc...
+
+== Installation
+
+=== Gem installation
+
+sudo gem install imageruby-devil
+
+== Usage
+
+No explicit require is needed
+  
+== Copying
+
+Copyright (c) 2011 Dario Seminara, released under the GPL License (see LICENSE)

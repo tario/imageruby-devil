@@ -64,9 +64,12 @@ module ImageRuby
       end
 
     # devil methods
-    def blur(*args)
-      devil do |devil_image|
-        devil_image.blur(*args)
+    ["alienify", "blur", "contrast", "edge_detect", "enboss", "equalize", "flip",
+    "gamma_correct", "mirror", "negate", "nosify", "rotate", "sharpen", "to_blob"].each do |m|
+      define_method m do |*args|
+        devil do |devil_image|
+          devil_image.send(m,*args)
+        end
       end
     end
   end

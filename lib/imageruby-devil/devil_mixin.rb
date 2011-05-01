@@ -62,6 +62,13 @@ module ImageRuby
 
         img
       end
+
+    # devil methods
+    def blur(*args)
+      devil do |devil_image|
+        devil_image.blur(*args)
+      end
+    end
   end
 
   register_image_mixin ImageRubyDevilMixin

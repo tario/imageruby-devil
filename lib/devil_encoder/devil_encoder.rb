@@ -18,8 +18,38 @@ you should have received a copy of the gnu general public license
 along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
-require "rubygems"
-require "devil_encoder/devil_decoder"
-require "devil_encoder/devil_encoder"
-require "imageruby-devil/devil_mixin"
+require "devil"
+require "tempfile"
 
+require "imageruby/encoder"
+
+module ImageRuby
+  class DevilEncoder < ImageRuby::Encoder
+
+    def encode(image, format, output)
+      if format == :bmp
+        raise UnableToEncodeException
+      end
+
+      tmpfile = Tempfile.new("img")
+      tmppath = tmpfile.path + ".bmp"
+      tmpfile.close
+
+      # save image data in a temp file
+      image.save(tmppath, :bmp)
+
+      tmpfile2 = Tempfile.new("img2")
+      tmppath2 = tmpfile2.path + "." + format.to_s
+      tmpfile2.close
+
+      Devil.with_image(tmppath) do |img|
+        img.save(tmppath2)
+      end
+
+      File.open(tmppath2) do |file|
+        file.read
+      end
+
+    end
+  end
+end

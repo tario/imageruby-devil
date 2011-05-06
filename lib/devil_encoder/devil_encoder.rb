@@ -22,11 +22,18 @@ require "devil"
 require "tempfile"
 
 require "imageruby/decoder"
-require "imageruby-bmp"
 
 module ImageRuby
   class DevilDecoder < ImageRuby::Decoder
     def decode(data, image_class)
+
+      magic = data[0..1]
+
+      # devil decoder cannot read bmp files because use bmp decoder
+      if magic == "BM" then
+        raise UnableToDecodeException
+      end
+
       # creates a temp file with data
       tmpfile = Tempfile.new("img")
       tmpfile.write data
@@ -50,7 +57,7 @@ module ImageRuby
         encoded_bmp = file.read
       end
 
-      ImageRuby::BmpDecoder.new.decode(encoded_bmp, image_class)
+      image_class.decode(encoded_bmp)
     end
   end
 end

@@ -42,8 +42,12 @@ module ImageRuby
       tmppath2 = tmpfile2.path + "." + format.to_s
       tmpfile2.close
 
-      Devil.with_image(tmppath) do |img|
-        img.save(tmppath2)
+      begin
+        Devil.with_image(tmppath) do |img|
+          img.save(tmppath2)
+        end
+      rescue RuntimeError
+        raise UnableToEncodeException
       end
 
       File.open(tmppath2) do |file|

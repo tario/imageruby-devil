@@ -47,9 +47,8 @@ module ImageRuby
       end
 
       File.open(tmppath2) do |file|
-        file.read
+        output << file.read
       end
-
     end
   end
 end

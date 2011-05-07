@@ -57,7 +57,7 @@ module ImageRuby
         encoded_bmp = file.read
       end
 
-      image_class.decode(encoded_bmp)
+      ImageRuby::Decoder.decode(encoded_bmp, image_class)
     end
   end
 end

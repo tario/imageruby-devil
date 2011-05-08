@@ -21,26 +21,24 @@ along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 require "devil"
 require "tempfile"
 
+require "helper/tempfile"
 require "imageruby/encoder"
 
 module ImageRuby
   class DevilEncoder < ImageRuby::Encoder
+
+    include TempFileMethods
 
     def encode(image, format, output)
       if format == :bmp
         raise UnableToEncodeException
       end
 
-      tmpfile = Tempfile.new("img")
-      tmppath = tmpfile.path + ".bmp"
-      tmpfile.close
+      tmppath = create_temp_path("img") + ".bmp"
+      tmppath2 = create_temp_path("img2") + "." + format.to_s
 
       # save image data in a temp file
       image.save(tmppath, :bmp)
-
-      tmpfile2 = Tempfile.new("img2")
-      tmppath2 = tmpfile2.path + "." + format.to_s
-      tmpfile2.close
 
       begin
         Devil.with_image(tmppath) do |img|

@@ -21,6 +21,7 @@ along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 require "devil"
 require "tempfile"
 
+require "helper/tempfile"
 require "imageruby/decoder"
 
 module ImageRuby

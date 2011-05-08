@@ -26,6 +26,9 @@ require "imageruby/decoder"
 
 module ImageRuby
   class DevilDecoder < ImageRuby::Decoder
+
+    include TempFileMethods
+
     def decode(data, image_class)
 
       magic = data[0..1]
@@ -36,29 +39,23 @@ module ImageRuby
       end
 
       # creates a temp file with data
-      tmpfile = Tempfile.new("img")
-      tmpfile.write data
+      create_temp_file("img", data) do |tmpfile|
+        path2 = create_temp_path("img2") + ".bmp"
 
-      path = tmpfile.path
+        use_temp_file(path2) do
+          Devil.with_image(path) do |img|
+            img.save(path2)
+          end
 
-      tmpfile.close
+          encoded_bmp = nil
 
-      tmpfile2 = Tempfile.new("img2")
+          File.open(path2, "rb") do |file|
+            encoded_bmp = file.read
+          end
 
-      path2 = tmpfile2.path + ".bmp"
-      tmpfile2.close
-
-      Devil.with_image(path) do |img|
-        img.save(path2)
+          ImageRuby::Decoder.decode(encoded_bmp, image_class)
+        end
       end
-
-      encoded_bmp = nil
-
-      File.open(path2, "rb") do |file|
-        encoded_bmp = file.read
-      end
-
-      ImageRuby::Decoder.decode(encoded_bmp, image_class)
     end
   end
 end

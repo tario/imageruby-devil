@@ -37,19 +37,25 @@ module ImageRuby
       tmppath = create_temp_path("img") + ".bmp"
       tmppath2 = create_temp_path("img2") + "." + format.to_s
 
-      # save image data in a temp file
-      image.save(tmppath, :bmp)
+      use_temp_file(tmppath) do
+      use_temp_file(tmppath2) do
 
-      begin
-        Devil.with_image(tmppath) do |img|
-          img.save(tmppath2)
+        # save image data in a temp file
+        image.save(tmppath, :bmp)
+
+        begin
+          Devil.with_image(tmppath) do |img|
+            img.save(tmppath2)
+          end
+        rescue RuntimeError
+          raise UnableToEncodeException
         end
-      rescue RuntimeError
-        raise UnableToEncodeException
-      end
 
-      File.open(tmppath2) do |file|
-        output << file.read
+        File.open(tmppath2) do |file|
+          output << file.read
+        end
+
+      end
       end
     end
   end

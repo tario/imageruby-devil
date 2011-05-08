@@ -41,6 +41,7 @@ module ImageRuby
       # creates a temp file with data
       create_temp_file("img", data) do |tmpfile|
         path2 = create_temp_path("img2") + ".bmp"
+        path = tmpfile.path
 
         use_temp_file(path2) do
           Devil.with_image(path) do |img|

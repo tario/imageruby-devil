@@ -5,6 +5,8 @@ Implements a set of features for ImageRuby using Devil image library:
 * New format encoders and decoders
 * New operations: blur, mirror, etc...
 
+NOTE: needs imageruby-bmp or imageruby-bmp-c gems installed to work
+
 == Installation
 
 === Gem installation

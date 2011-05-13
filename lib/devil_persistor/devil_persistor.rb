@@ -29,7 +29,15 @@ module ImageRuby
 
     def persist(image,path,format)
 
+      if path.respond_to? :devil_path
+        raise UnableToPersistException
+      end
+
       tmppath = create_temp_path("img") + ".bmp"
+
+      def tmppath.devil_path
+      end
+
       FilePersistor.persist(image,tmppath,:bmp)
 
       use_temp_file(tmppath) do

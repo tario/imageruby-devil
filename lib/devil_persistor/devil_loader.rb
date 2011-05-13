@@ -28,7 +28,16 @@ module ImageRuby
     include TempFileMethods
 
     def load(path)
+
+      if path.respond_to? :devil_path
+        raise UnableToLoadException
+      end
+
       path2 = create_temp_path("img2") + ".bmp"
+
+      def path2.devil_path
+
+      end
 
       use_temp_file(path2) do
         Devil.with_image(path) do |img|

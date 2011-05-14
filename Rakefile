@@ -16,7 +16,7 @@ spec = Gem::Specification.new do |s|
   s.extra_rdoc_files = [ 'README' ]
   s.add_dependency "devil", ">= 0.1.9.5"
 #  s.rdoc_options << '--main' << 'README'
-  s.files = Dir.glob("{lib}/**/*") + Dir.glob("{examples}/**/*") 
+  s.files = Dir.glob("{lib}/**/*") + Dir.glob("{examples}/**/*.rb") 
     [ 'LICENSE', 'AUTHORS', 'CHANGELOG', 'README', 'Rakefile' ]
 end
 

@@ -18,10 +18,16 @@ you should have received a copy of the gnu general public license
 along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
+require "helper/tempfile"
 
 module ImageRuby
 
   module ImageRubyDevilMixin
+
+      class << self
+        include TempFileMethods
+      end
+      include TempFileMethods
 
       def self.tmppath
         tmpfile = Tempfile.new("img")
@@ -33,21 +39,25 @@ module ImageRuby
 
       def self.from_devil(devil_image)
         path = ImageRubyDevilMixin.tmppath+".bmp"
-        devil_image.save(path)
 
-        Image.from_file(path)
+        use_temp_file(path) do
+          devil_image.save(path)
+          Image.from_file(path)
+        end
       end
 
       def to_devil
         path = ImageRubyDevilMixin.tmppath+".bmp"
         save(path,:bmp)
 
-        if block_given?
-          Devil.with_image(path) do |devil_image|
-            yield(devil_image)
+        use_temp_file(path) do
+          if block_given?
+            Devil.with_image(path) do |devil_image|
+              yield(devil_image)
+            end
+          else
+            Devil.load_image(path)
           end
-        else
-          Devil.load_image(path)
         end
       end
 

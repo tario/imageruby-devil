@@ -20,7 +20,36 @@ sudo gem install imageruby-devil
 
 No explicit require is needed, examples
 
-=== Example 1:
+=== Example 1: PNG
+
+  require "imageruby"
+
+  include ImageRuby
+
+  # create image (red gradient)
+  image = Image.new(255,255) {|x,y| Color.from_rgb(x,0,0) }
+
+  # save image on png format
+  image.save("image.png", :png)
+
+=== Example 2: Blur and mirror
+
+  require "imageruby"
+
+  include ImageRuby
+
+  # load image generated in the previous example
+  image = Image.from_file("image.png")
+
+  # apply blur effect
+  image.blur(4)
+
+  # mirror image
+  image.mirror
+
+  # save image on png format
+  image.save("image2.png", :png)
+
 
 == Copying
 

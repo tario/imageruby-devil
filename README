@@ -1,11 +1,14 @@
 = ImageRuby-Devil - Bridge between ImageRuby and Devil image library
 
-Implements a set of features for ImageRuby using Devil image library:
+Implements a set of features for ImageRuby using Devil image library (https://github.com/banister/devil)
 
-* New format encoders and decoders
-* New operations: blur, mirror, etc...
+* Support to load and save formats supported by devil library including jpg, tga, png, etc...
 
-NOTE: needs imageruby-bmp or imageruby-bmp-c gems installed to work
+* New image operations: "alienify", "blur", "contrast", "edge_detect", "enboss", "equalize", "flip",
+    "gamma_correct", "mirror", "negate", "nosify", "rotate", "sharpen", "to_blob" inherited from
+    devil library see devil documentation at http://rdoc.info/github/banister/devil/master/Devil/Image
+
+NOTE: imageruby-devil requires imageruby-bmp or imageruby-bmp-c gems in order to to work
 
 == Installation
 
@@ -15,8 +18,10 @@ sudo gem install imageruby-devil
 
 == Usage
 
-No explicit require is needed
-  
+No explicit require is needed, examples
+
+=== Example 1:
+
 == Copying
 
 Copyright (c) 2011 Dario Seminara, released under the GPL License (see LICENSE)

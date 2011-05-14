@@ -26,8 +26,8 @@ No explicit require is needed, examples
 
   include ImageRuby
 
-  # create image (red gradient)
-  image = Image.new(255,255) {|x,y| Color.from_rgb(x,0,0) }
+  # create image (red gradient and random green)
+  image = Image.new(255,255) {|x,y| Color.from_rgb(x,rand(200),0) }
 
   # save image on png format
   image.save("image.png", :png)
@@ -42,10 +42,10 @@ No explicit require is needed, examples
   image = Image.from_file("image.png")
 
   # apply blur effect
-  image.blur(4)
+  image = image.blur(10)
 
   # mirror image
-  image.mirror
+  image = image.mirror
 
   # save image on png format
   image.save("image2.png", :png)

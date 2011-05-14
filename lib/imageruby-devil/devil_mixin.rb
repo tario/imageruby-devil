@@ -18,6 +18,7 @@ you should have received a copy of the gnu general public license
 along with imageruby-devil.  if not, see <http://www.gnu.org/licenses/>.
 
 =end
+require "devil"
 require "helper/tempfile"
 
 module ImageRuby

@@ -75,8 +75,12 @@ module ImageRuby
       end
 
     # devil methods
-    ["alienify", "blur", "contrast", "edge_detect", "enboss", "equalize", "flip",
-    "gamma_correct", "mirror", "negate", "nosify", "rotate", "sharpen", "to_blob"].each do |m|
+    ["name", "rotate", "negative", "delete", "noisify", "emboss",
+    "resize2", "gamma_correct", "clear", "contrast",
+    "edge_detect", "pixelize", "resize", "flip",
+    "alienify", "blur", "negate","composite",
+    "equalize", "sharpen", "enlarge_canvas",
+    "mirror", "crop"].each do |m|
       define_method m do |*args|
         devil do |devil_image|
           devil_image.send(m,*args)

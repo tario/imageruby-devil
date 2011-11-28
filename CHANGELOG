@@ -1,0 +1,4 @@
+0.2.0	Added devil methods rotate,  noisify, emboss, resize2,clear,contrast
+		edge_detect, pixelize, resize, blur, negate, mirror, crop, enlarge_canvas
+
+0.1.0	Initial release with devil image decoders and actions

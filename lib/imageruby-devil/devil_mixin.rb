@@ -75,7 +75,7 @@ module ImageRuby
       end
 
     # devil methods
-    ["name", "rotate", "negative", "delete", "noisify", "emboss",
+    ["rotate", "negative", "noisify", "emboss",
     "resize2", "gamma_correct", "clear", "contrast",
     "edge_detect", "pixelize", "resize", "flip",
     "alienify", "blur", "negate","composite",
